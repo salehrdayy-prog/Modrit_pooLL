@@ -1,0 +1,283 @@
+/* --------------- General Styles --------------- */
+* {
+  box-sizing: border-box;
+  font-family: 'Tahoma', sans-serif; /* تغییر فونت برای خوانایی بهتر */
+  scroll-behavior: smooth; /* اسکرول نرم */
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #f0f4f8, #e0e8f0); /* گرادیان پس‌زمینه */
+  color: #333;
+  line-height: 1.6;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 30px auto; /* فاصله بیشتر از بالا و پایین */
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.8); /* پس‌زمینه شفاف برای هدر */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  margin: 0 0 10px;
+  color: #2c3e50; /* رنگ سرمه‌ای تیره‌تر */
+  font-size: 2.5em; /* فونت بزرگتر */
+}
+
+.header p {
+  margin: 0;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* عرض بیشتر برای کارت‌ها */
+  gap: 25px; /* فاصله بیشتر بین کارت‌ها */
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9); /* پس‌زمینه کارت شفاف‌تر */
+  border-radius: 20px; /* گوشه‌های گردتر */
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); /* سایه بیشتر */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* انیمیشن */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* کمی بلند شدن کارت */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18); /* سایه قوی‌تر */
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #34495e; /* رنگ عنوان */
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  border-bottom: 2px solid #e0e8f0; /* خط زیر عنوان */
+  padding-bottom: 10px;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap; /* اجازه شکستن به سطر پایین */
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stats > div {
+  flex: 1;
+  min-width: 150px; /* حداقل عرض برای هر بخش */
+  background: #eef4ff;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #d0d9e8;
+}
+
+.stats span {
+  display: block;
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.stats strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 20px; /* فونت بزرگتر */
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* --------------- Form Styles --------------- */
+.form-row,
+.form-grid {
+  display: grid;
+  gap: 12px; /* فاصله بیشتر */
+}
+
+.form-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+  padding: 12px 15px; /* پدینگ بیشتر */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px; /* فونت بزرگتر */
+  outline: none; /* حذف خط دور */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #3498db; /* رنگ آبی در فوکوس */
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* سایه ظریف */
+}
+
+button {
+  padding: 12px 15px;
+  background: #3498db; /* آبی */
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+button:hover {
+  background: #2980b9; /* آبی تیره‌تر */
+}
+
+.reset-btn {
+  background: #e74c3c; /* قرمز */
+}
+.reset-btn:hover {
+  background: #c0392b; /* قرمز تیره‌تر */
+}
+
+.edit-btn { background-color: #f39c12; } /* نارنجی */
+.edit-btn:hover { background-color: #e67e22; }
+
+.delete-btn, .disable-btn { background-color: #95a5a6; } /* خاکستری */
+.delete-btn:hover, .disable-btn:hover { background-color: #7f8c8d; }
+
+.enable-btn { background-color: #2ecc71; } /* سبز */
+.enable-btn:hover { background-color: #27ae60; }
+
+/* --------------- List and Item Styles --------------- */
+.list {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+  max-height: 250px; /* محدود کردن ارتفاع لیست */
+  overflow-y: auto; /* فعال کردن اسکرول */
+  padding-right: 5px; /* کمی فضای داخلی */
+}
+
+.item {
+  background: #f8f9fc;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #e6e9f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* برای موبایل */
+  gap: 10px;
+}
+
+.item span {
+  flex-grow: 1;
+  margin-right: 10px; /* فاصله از دکمه‌ها */
+  word-break: break-word; /* شکستن کلمات طولانی */
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0; /* جلوگیری از کوچک شدن */
+}
+
+.item.inactive {
+  background: #fcfcfc;
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+/* --------------- Analysis Card Styles --------------- */
+.analysis-card {
+  grid-column: span 1; /* در حالت پیش‌فرض یک ستون */
+}
+
+.analysis-card canvas {
+  width: 100% !important;
+  height: 280px !important; /* ارتفاع مشخص برای نمودار */
+}
+
+.analysis-list {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.analysis-item {
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e9f2;
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --------------- Responsive Styles --------------- */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .analysis-card {
+    grid-column: span 2; /* در نمایشگرهای کوچکتر، تحلیل دو ستون را بگیرد */
+  }
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2em;
+  }
+  .header p {
+    font-size: 1em;
+  }
+  .grid {
+    grid-template-columns: 1fr; /* تمام کارت‌ها در یک ستون */
+  }
+  .analysis-card {
+    grid-column: span 1;
+  }
+  .form-grid {
+    grid-template-columns: 1fr; /* فرم‌ها در موبایل تک ستونی */
+  }
+  .item {
+    flex-direction: column; /* آیتم‌ها در لیست هم عمودی شوند */
+    align-items: flex-start;
+  }
+  .item-actions {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 10px;
+  }
+  .card {
+    padding: 15px;
+  }
+  button, input, select {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  .stats strong {
+    font-size: 18px;
+  }
+}

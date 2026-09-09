@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>راهنمای کامل | مدیریت مالی هوشمند</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
+      color: #1a1a2e;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 32px;
+      padding: 40px 45px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* ===== BACK BUTTON ===== */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #8B5CF6;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 40px;
+      background: rgba(139, 92, 246, 0.08);
+      transition: all 0.3s ease;
+      margin-bottom: 25px;
+      border: 1px solid rgba(139, 92, 246, 0.15);
+    }
+
+    .back-btn:hover {
+      background: rgba(139, 92, 246, 0.15);
+      transform: translateX(-4px);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    .back-btn i {
+      font-size: 14px;
+    }
+
+    /* ===== HEADER ===== */
+    .page-header {
+      margin-bottom: 35px;
+      padding-bottom: 25px;
+      border-bottom: 3px solid rgba(139, 92, 246, 0.15);
+    }
+
+    .page-header h1 {
+      font-size: 36px;
+      font-weight: 800;
+      color: #1a1a2e;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-header h1 i {
+      color: #8B5CF6;
+      background: linear-gradient(135deg, #8B5CF6, #6C3CE1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: #64748B;
+      margin-top: 6px;
+      font-weight: 400;
+    }
+    /* ===== SECTION TITLE ===== */
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 16px;
+  border-right: 4px solid #8B5CF6;
+}
+
+.section-title i {
+  color: #8B5CF6;
+  font-size: 22px;
+}
+
+/* ===== STEP CARDS ===== */
+.step {
+  background: #fff;
+  padding: 22px 26px;
+  border-radius: 18px;
+  margin: 14px 0;
+  border-right: 5px solid #8B5CF6;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.02), transparent);
+  pointer-events: none;
+}
+
+.step:hover {
+  transform: translateX(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  border-color: #6C3CE1;
+}
+
+.step .step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  color: #8B5CF6;
+  font-size: 18px;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.step .step-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.step .step-content .text {
+  flex: 1;
+}
+
+.step .step-content .text strong {
+  display: block;
+  font-size: 16px;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.step .step-content .text .desc {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.step .step-content .text .desc code {
+  background: #f1f5f9;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #8B5CF6;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.step .step-badge {
+  background: linear-gradient(135deg, #8B5CF6, #6C3CE1);
+  color: #fff;
+  padding: 2px 12px;
+  border-radius: 40px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+/* ===== TIPS ===== */
+.tip {
+  padding: 16px 22px;
+  border-radius: 16px;
+  margin: 14px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: all 0.3s ease;
+}
+
+.tip i {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tip .tip-content {
+  flex: 1;
+}
+
+.tip .tip-content strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.tip .tip-content p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.tip.gold {
+  background: #fef9c3;
+  border-right: 4px solid #F59E0B;
+}
+.tip.gold i {
+  color: #F59E0B;
+}
+.tip.gold .tip-content strong {
+  color: #92400E;
+}
+
+.tip.blue {
+  background: #dbeafe;
+  border-right: 4px solid #3B82F6;
+}
+.tip.blue i {
+  color: #3B82F6;
+}
+.tip.blue .tip-content strong {
+  color: #1E40AF;
+}
+
+.tip.purple {
+  background: #ede9fe;
+  border-right: 4px solid #8B5CF6;
+}
+.tip.purple i {
+  color: #8B5CF6;
+}
+.tip.purple .tip-content strong {
+  color: #5B21B6;
+}
+
+.tip.green {
+  background: #d1fae5;
+  border-right: 4px solid #10B981;
+}
+.tip.green i {
+  color: #10B981;
+}
+.tip.green .tip-content strong {
+  color: #065F46;
+}
+
+    /* ===== GRID FOR FEATURES ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .feature-grid .step {
+      margin: 0;
+      border-right-color: #A78BFA;
+    }
+
+    .feature-grid .step .step-badge {
+      background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+    }
+
+    /* ===== TABLE ===== */
+    .feature-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 16px 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .feature-table thead {
+      background: linear-gradient(135deg, #8B5CF6, #6C3CE1);
+      color: #fff;
+    }
+
+    .feature-table th {
+      padding: 14px 20px;
+      text-align: right;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .feature-table td {
+      padding: 12px 20px;
+      background: #fff;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .feature-table tbody tr:hover td {
+      background: #f8fafc;
+    }
+
+    .feature-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .feature-table td i {
+      color: #8B5CF6;
+      width: 24px;
+      text-align: center;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 24px 18px;
+        border-radius: 20px;
+      }
+
+      .page-header h1 {
+        font-size: 28px;
+        flex-wrap: wrap;
+      }
+
+      .page-header p {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+
+      .step {
+        padding: 18px 20px;
+      }
+
+      .step .step-content {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .step .step-badge {
+        align-self: flex-start;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-table {
+        font-size: 13px;
+      }
+
+      .feature-table th,
+      .feature-table td {
+        padding: 10px 14px;
+      }
+
+      .tip {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 16px 12px;
+        border-radius: 16px;
+      }
+
+      .page-header h1 {
+        font-size: 24px;
+      }
+
+      .section-title {
+        font-size: 18px;
+        padding-right: 12px;
+      }
+
+      .step {
+        padding: 14px 16px;
+        border-right-width: 4px;
+      }
+
+      .feature-table {
+        font-size: 12px;
+      }
+
+      .feature-table th,
+      .feature-table td {
+        padding: 8px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== BACK BUTTON ===== -->
+  <a href="index.html" class="back-btn">
+    <i class="fas fa-arrow-right"></i>
+    بازگشت به داشبورد
+  </a>
+
+  <!-- ===== HEADER ===== -->
+  <div class="page-header">
+    <h1>
+      <i class="fas fa-book-open"></i>
+      راهنمای کامل مدیریت مالی هوشمند
+    </h1>
+    <p>همه‌چیز را در کمتر از ۵ دقیقه یاد بگیرید و سرمایه خود را مدیریت کنید</p>
+  </div>
+  <!-- ============================================================ -->
+<!-- بخش ۱: شروع سریع -->
+<!-- ============================================================ -->
+<h2 class="section-title">
+  <i class="fas fa-rocket"></i>
+  شروع سریع
+</h2>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>۱. ثبت بودجه</strong>
+      <div class="desc">
+        در کارت <strong>بودجه</strong>، مبلغ اولیه سرمایه‌تان را وارد کنید و روی دکمه <code>ثبت</code> بزنید.
+        این مبلغ، پایه‌ی تمام محاسبات مالی شما خواهد بود.
+      </div>
+    </div>
+    <span class="step-badge">مرحله ۱</span>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>۲. ثبت درآمد</strong>
+      <div class="desc">
+        هر درآمدی (حقوق، فروش کالا، هدیه، سود سرمایه‌گذاری و...) را با <strong>شرح، دسته‌بندی و مبلغ</strong> ثبت کنید.
+        سیستم به‌طور خودکار مانده بودجه را افزایش می‌دهد.
+      </div>
+    </div>
+    <span class="step-badge">مرحله ۲</span>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>۳. ثبت هزینه</strong>
+      <div class="desc">
+        هزینه‌های روزمره (خوراک، مسکن، حمل‌ونقل و...) را ثبت کنید.
+        سیستم به‌طور خودکار <strong>مانده بودجه را به‌روز</strong> می‌کند و اگر هزینه از بودجه بیشتر شود، هشدار می‌دهد.
+      </div>
+    </div>
+    <span class="step-badge">مرحله ۳</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- بخش ۲: قابلیت‌های پیشرفته -->
+<!-- ============================================================ -->
+<h2 class="section-title">
+  <i class="fas fa-star"></i>
+  قابلیت‌های پیشرفته
+</h2>
+
+<div class="feature-grid">
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong><i class="fas fa-university" style="color:#8B5CF6; margin-left:8px;"></i> چند حسابی</strong>
+        <div class="desc">
+          حساب‌های مختلف (بانکی، نقدی، اعتباری) بسازید و بین آنها <strong>انتقال وجه</strong> انجام دهید.
+          هر تراکنش به حساب خاصی متصل می‌شود.
+        </div>
+      </div>
+      <span class="step-badge">پیشرفته</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong><i class="fas fa-tags" style="color:#8B5CF6; margin-left:8px;"></i> بودجه‌بندی دسته‌ها</strong>
+        <div class="desc">
+          برای هر دسته هزینه (خوراک، مسکن، حمل‌ونقل و...) یک <strong>سقف مجزا</strong> تعیین کنید.
+          سیستم به‌طور خودکار هشدار می‌دهد اگر به ۸۰٪ سقف نزدیک شوید.
+        </div>
+      </div>
+      <span class="step-badge">پیشرفته</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong><i class="fas fa-bullseye" style="color:#8B5CF6; margin-left:8px;"></i> هدف مالی با ضرب‌الاجل</strong>
+        <div class="desc">
+          یک هدف پس‌انداز با <strong>مبلغ و تاریخ سررسید</strong> تعیین کنید.
+          درصد پیشرفت شما به‌صورت <strong>نوار پیشرفت</strong> نمایش داده می‌شود.
+        </div>
+      </div>
+      <span class="step-badge">پیشرفته</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong><i class="fas fa-bell" style="color:#8B5CF6; margin-left:8px;"></i> یادآوری پرداخت</strong>
+        <div class="desc">
+          برای قبوض، اقساط و پرداخت‌های دوره‌ای <strong>یادآوری</strong> بسازید.
+          تاریخ‌های گذشته به‌صورت <strong>قرمز</strong> مشخص می‌شوند تا فراموش نشوند.
+        </div>
+      </div>
+      <span class="step-badge">پیشرفته</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong><i class="fas fa-sync-alt" style="color:#8B5CF6; margin-left:8px;"></i> درآمد دوره‌ای</strong>
+        <div class="desc">
+          درآمدهای <strong>روزانه، هفتگی یا ماهانه</strong> را تنظیم کنید.
+          با فعال بودن، سیستم به‌طور خودکار مبلغ را به بودجه اضافه می‌کند.
+        </div>
+      </div>
+      <span class="step-badge">پیشرفته</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong><i class="fas fa-robot" style="color:#8B5CF6; margin-left:8px;"></i> پیش‌بینی هوشمند</strong>
+        <div class="desc">
+          سیستم با تحلیل هزینه‌های شما، <strong>هزینه‌های ماه آینده</strong> را پیش‌بینی می‌کند.
+          برای دقت بیشتر، حداقل <strong>۵ هزینه</strong> ثبت کنید.
+        </div>
+      </div>
+      <span class="step-badge">پیشرفته</span>
+    </div>
+  </div>
+
+</div>
+<!-- ============================================================ -->
+<!-- بخش ۳: تحلیل و گزارش -->
+<!-- ============================================================ -->
+<h2 class="section-title">
+  <i class="fas fa-chart-line"></i>
+  تحلیل و گزارش
+</h2>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>📊 نمودار روند (خطی)</strong>
+      <div class="desc">
+        تغییرات <strong>درآمد و هزینه</strong> را در بازه‌های <strong>هفتگی، ماهانه یا سالانه</strong> مشاهده کنید.
+        با کلیک روی دکمه‌های <code>هفتگی</code>، <code>ماهانه</code> و <code>سالانه</code> بازه را تغییر دهید.
+      </div>
+    </div>
+    <span class="step-badge">تحلیل</span>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>📊 مقایسه ماهانه</strong>
+      <div class="desc">
+        با کلیک روی دکمه <code>مقایسه ماهانه</code>، عملکرد مالی <strong>ماه جاری</strong> را با <strong>ماه قبل</strong> مقایسه کنید.
+        تفاوت درآمد، هزینه و مانده به‌صورت دقیق نمایش داده می‌شود.
+      </div>
+    </div>
+    <span class="step-badge">تحلیل</span>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>📊 لیست تحلیل دسته‌بندی</strong>
+      <div class="desc">
+        در پایین نمودار، همه دسته‌های هزینه <strong>به‌همراه مبلغ دقیق</strong> و مرتب‌شده از بیشترین به کمترین نمایش داده می‌شوند.
+        این به شما کمک می‌کند <strong>بزرگترین هزینه‌ها</strong> را شناسایی کنید.
+      </div>
+    </div>
+    <span class="step-badge">تحلیل</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- بخش ۴: ذخیره‌سازی و پشتیبان -->
+<!-- ============================================================ -->
+<h2 class="section-title">
+  <i class="fas fa-database"></i>
+  ذخیره‌سازی و پشتیبان
+</h2>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>💾 ذخیره خودکار</strong>
+      <div class="desc">
+        همه داده‌ها به‌صورت <strong>خودکار</strong> در مرورگر شما ذخیره می‌شوند.
+        حتی پس از <strong>بستن مرورگر</strong> نیز باقی می‌مانند. هر ۳۰ دقیقه یکبار یک <strong>پشتیبان خودکار</strong> نیز ذخیره می‌شود.
+      </div>
+    </div>
+    <span class="step-badge">پشتیبان</span>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>📥 خروجی JSON</strong>
+      <div class="desc">
+        با کلیک روی دکمه <code>خروجی JSON</code> در هدر صفحه، یک فایل <strong>پشتیبان کامل</strong> از همه داده‌ها دریافت می‌کنید.
+        این فایل شامل بودجه، درآمد، هزینه، حساب‌ها، اهداف، یادآوری‌ها و همه تنظیمات است.
+      </div>
+    </div>
+    <span class="step-badge">پشتیبان</span>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>📤 ورودی JSON</strong>
+      <div class="desc">
+        با کلیک روی دکمه <code>ورودی JSON</code>، فایل پشتیبان قبلی را <strong>وارد</strong> کنید.
+        همه داده‌های قبلی با داده‌های جدید <strong>جایگزین</strong> می‌شوند.
+      </div>
+    </div>
+    <span class="step-badge">پشتیبان</span>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-content">
+    <div class="text">
+      <strong>📊 خروجی CSV</strong>
+      <div class="desc">
+        با کلیک روی دکمه <code>CSV</code> در هدر صفحه، یک فایل <strong>Excel</strong> از همه تراکنش‌ها دریافت می‌کنید.
+        این فایل شامل ستون‌های <strong>نوع، تاریخ، شرح، دسته، مبلغ و حساب</strong> است.
+      </div>
+    </div>
+    <span class="step-badge">پشتیبان</span>
+  </div>
+</div>
+  <!-- ============================================================ -->
+  <!-- بخش ۵: ویرایش و حذف -->
+  <!-- ============================================================ -->
+  <h2 class="section-title">
+    <i class="fas fa-edit"></i>
+    ویرایش و حذف
+  </h2>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong>✏️ ویرایش آیتم</strong>
+        <div class="desc">
+          روی دکمه <code>ویرایش</code> هر آیتم کلیک کنید. اطلاعات به‌صورت خودکار به <strong>فرم ورودی</strong> بازمی‌گردد.
+          پس از اصلاح، دوباره روی دکمه <code>ثبت</code> کلیک کنید تا آیتم جدید جایگزین شود.
+        </div>
+      </div>
+      <span class="step-badge">مدیریت</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong>🗑️ حذف آیتم</strong>
+        <div class="desc">
+          با کلیک روی دکمه <code>حذف</code>، یک پیام <strong>تأیید</strong> نمایش داده می‌شود.
+          پس از تأیید، آیتم پاک شده و <strong>بودجه به‌طور خودکار اصلاح</strong> می‌شود.
+        </div>
+      </div>
+      <span class="step-badge">مدیریت</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- بخش ۶: تور راهنما -->
+  <!-- ============================================================ -->
+  <h2 class="section-title">
+    <i class="fas fa-compass"></i>
+    تور راهنما
+  </h2>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong>🗺️ تور تعاملی</strong>
+        <div class="desc">
+          با کلیک روی هر <strong>کارت</strong> در داشبورد، یک راهنمای مختصر درباره‌ی آن کارت نمایش داده می‌شود.
+          هر کارت <strong>فقط یک بار</strong> راهنما را نشان می‌دهد تا تجربه‌ی کاربری روان‌تری داشته باشید.
+        </div>
+      </div>
+      <span class="step-badge">راهنما</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong>🔄 ریست تور راهنما</strong>
+        <div class="desc">
+          اگر می‌خواهید تور راهنما را دوباره ببینید، <strong>۵ بار پشت سر هم</strong> روی عنوان <code>مدیریت مالی حرفه‌ای</code> کلیک کنید.
+          تور راهنما <strong>ریست</strong> شده و دوباره با کلیک روی کارت‌ها نمایش داده می‌شود.
+        </div>
+      </div>
+      <span class="step-badge">راهنما</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- بخش ۷: امتیاز سلامت مالی -->
+  <!-- ============================================================ -->
+  <h2 class="section-title">
+    <i class="fas fa-heartbeat"></i>
+    امتیاز سلامت مالی
+  </h2>
+
+  <div class="step">
+    <div class="step-content">
+      <div class="text">
+        <strong>❤️ امتیاز سلامت مالی</strong>
+        <div class="desc">
+          سیستم به‌طور خودکار یک <strong>امتیاز از ۱۰۰</strong> به وضعیت مالی شما می‌دهد.
+          این امتیاز بر اساس <strong>نسبت هزینه به درآمد</strong> و <strong>مانده بودجه</strong> محاسبه می‌شود.
+          هرچه امتیاز بالاتر باشد، وضعیت مالی شما <strong>بهتر</strong> است.
+        </div>
+      </div>
+      <span class="step-badge">تحلیل</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- بخش ۸: نکات طلایی -->
+  <!-- ============================================================ -->
+  <h2 class="section-title">
+    <i class="fas fa-gem"></i>
+    نکات طلایی
+  </h2>
+
+  <div class="tip gold">
+    <i class="fas fa-lightbulb"></i>
+    <div class="tip-content">
+      <strong>🎯 هدف‌گذاری هوشمند</strong>
+      <p>همیشه یک <strong>هدف پس‌انداز</strong> مشخص داشته باشید. این به شما انگیزه می‌دهد تا هزینه‌ها را بهتر مدیریت کنید.</p>
+    </div>
+  </div>
+
+  <div class="tip purple">
+    <i class="fas fa-chart-simple"></i>
+    <div class="tip-content">
+      <strong>📊 تحلیل منظم</strong>
+      <p>هر هفته یا ماه یکبار <strong>نمودار روند</strong> و <strong>لیست تحلیل</strong> را بررسی کنید تا الگوهای هزینه‌تان را بشناسید.</p>
+    </div>
+  </div>
+
+  <div class="tip blue">
+    <i class="fas fa-shield-alt"></i>
+    <div class="tip-content">
+      <strong>💾 پشتیبان‌گیری منظم</strong>
+      <p>هر ماه یکبار با دکمه <strong>خروجی JSON</strong> از داده‌های خود <strong>پشتیبان</strong> بگیرید تا در صورت پاک شدن مرورگر، اطلاعاتتان از دست نرود.</p>
+    </div>
+  </div>
+
+  <div class="tip green">
+    <i class="fas fa-hand-holding-heart"></i>
+    <div class="tip-content">
+      <strong>💡 سرمایه‌گذاری هوشمند</strong>
+      <p>اگر بیش از <strong>۲۰٪</strong> از درآمدتان را پس‌انداز می‌کنید، سیستم به شما <strong>پیشنهاد سرمایه‌گذاری</strong> می‌دهد. از این فرصت استفاده کنید!</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- بخش ۹: جدول خلاصه قابلیت‌ها -->
+  <!-- ============================================================ -->
+  <h2 class="section-title">
+    <i class="fas fa-list-check"></i>
+    خلاصه قابلیت‌ها
+  </h2>
+
+  <table class="feature-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>قابلیت</th>
+        <th>توضیح</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><i class="fas fa-wallet"></i></td>
+        <td>بودجه</td>
+        <td>ثبت و مدیریت بودجه اولیه</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-arrow-down"></i></td>
+        <td>ثبت درآمد</td>
+        <td>ثبت درآمد با شرح و دسته‌بندی</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-arrow-up"></i></td>
+        <td>ثبت هزینه</td>
+        <td>ثبت هزینه با شرح و دسته‌بندی</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-university"></i></td>
+        <td>چند حسابی</td>
+        <td>ساخت و مدیریت چند حساب با انتقال وجه</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-tags"></i></td>
+        <td>بودجه‌بندی دسته‌ها</td>
+        <td>سقف هزینه برای هر دسته</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-bullseye"></i></td>
+        <td>هدف مالی</td>
+        <td>هدف پس‌انداز با ضرب‌الاجل</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-bell"></i></td>
+        <td>یادآوری پرداخت</td>
+        <td>یادآوری برای قبوض و اقساط</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-sync-alt"></i></td>
+        <td>درآمد دوره‌ای</td>
+        <td>درآمد روزانه/هفتگی/ماهانه</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-chart-line"></i></td>
+        <td>نمودار روند</td>
+        <td>نمودار خطی درآمد و هزینه</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-robot"></i></td>
+        <td>پیش‌بینی هوشمند</td>
+        <td>پیش‌بینی هزینه‌های آینده</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-heartbeat"></i></td>
+        <td>امتیاز سلامت مالی</td>
+        <td>نمره وضعیت مالی از ۱۰۰</td>
+      </tr>
+      <tr>
+        <td><i class="fas fa-file-export"></i></td>
+        <td>خروجی JSON / CSV</td>
+        <td>پشتیبان‌گیری و گزارش</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <!-- بخش ۱۰: نکته نهایی -->
+  <!-- ============================================================ -->
+  <div class="tip blue" style="margin-top: 30px; background: linear-gradient(135deg, #dbeafe, #e0e7ff); border-color: #8B5CF6;">
+    <i class="fas fa-heart" style="color: #8B5CF6;"></i>
+    <div class="tip-content">
+      <strong>🎉 مبارک! شما آماده‌اید!</strong>
+      <p>
+        همه تغییرات شما به‌صورت <strong>خودکار</strong> ذخیره می‌شوند.
+        نیازی به دکمه «ذخیره» نیست! فقط از مدیریت مالی خود لذت ببرید. 🚀
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid rgba(139, 92, 246, 0.1); text-align: center; font-size: 13px; color: #94A3B8;">
+    <i class="fas fa-code"></i> ساخته شده با ❤️ برای مدیریت مالی هوشمند
+    <span style="display: inline-block; margin: 0 8px;">•</span>
+    <i class="fas fa-version"></i> نسخه ۲.۰
+  </div>
+
+</div>
+
+</body>
+</html>

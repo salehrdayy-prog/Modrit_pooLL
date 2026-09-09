@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مدیریت مالی حرفه‌ای | نسخه تب‌بندی</title>
+  <link rel="manifest" href="manifest.json">
+  <!-- ===== EXTERNAL LIBRARIES ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <!-- ===== CUSTOM CSS ===== -->
+  <link rel="stylesheet" href="index.css" />
+  <link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192x192.png" />
+<meta name="theme-color" content="#6C3CE1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <h1><i class="fas fa-coins"></i> مالی هوشمند</h1>
+      <div class="header-actions">
+        <button onclick="window.location.href='help.html'" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:6px 14px;border-radius:40px;cursor:pointer;font-size:12px;">
+          <i class="fas fa-question-circle"></i> راهنما
+        </button>
+        <button onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+        <button onclick="exportData()"><i class="fas fa-file-export"></i> خروجی</button>
+        <button onclick="importData()"><i class="fas fa-file-import"></i> ورودی</button>
+        <button onclick="resetAll()" style="background:rgba(239,68,68,0.2);color:#fca5a5;"><i class="fas fa-trash"></i></button>
+      </div>
+    </header>
+
+    <!-- ===== TABS ===== -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchTab('dashboard')"><i class="fas fa-chart-pie"></i> <span>داشبورد</span></button>
+      <button class="tab-btn" onclick="switchTab('transactions')"><i class="fas fa-exchange-alt"></i> <span>تراکنش‌ها</span></button>
+      <button class="tab-btn" onclick="switchTab('accounts')"><i class="fas fa-university"></i> <span>حساب‌ها</span></button>
+      <button class="tab-btn" onclick="switchTab('analysis')"><i class="fas fa-chart-line"></i> <span>تحلیل</span></button>
+      <button class="tab-btn" onclick="switchTab('settings')"><i class="fas fa-cog"></i> <span>تنظیمات</span></button>
+    </div>
+
+    <!-- ===== TAB 1: DASHBOARD ===== -->
+    <div id="tab-dashboard" class="tab-content active">
+
+      <div class="suggestions-panel" id="suggestionsPanel">
+        <div class="suggestion-item success"><i class="fas fa-check-circle"></i> <span id="suggestion1">در حال تحلیل...</span></div>
+        <div class="suggestion-item warning"><i class="fas fa-exclamation-triangle"></i> <span id="suggestion2">در حال تحلیل...</span></div>
+        <div class="suggestion-item danger"><i class="fas fa-times-circle"></i> <span id="suggestion3">در حال تحلیل...</span></div>
+        <div class="suggestion-item robot"><i class="fas fa-robot"></i> <span id="suggestionAI">🤖 پیش‌بینی...</span></div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card income"><div class="label">مجموع درآمدها</div><div class="value" id="totalIncome">۰</div><div class="sub">تمام دوره</div></div>
+        <div class="stat-card expense"><div class="label">مجموع هزینه‌ها</div><div class="value" id="totalExpense">۰</div><div class="sub">تمام دوره</div></div>
+        <div class="stat-card balance"><div class="label">موجودی فعلی</div><div class="value" id="balanceDisplay">۰</div><div class="sub">درآمد - هزینه</div></div>
+        <div class="stat-card budget"><div class="label">بودجه اولیه</div><div class="value" id="initialBudgetDisplay">۰</div><div class="sub" id="budgetSub">۰% مصرف شده</div></div>
+        <div class="stat-card health"><div class="label">سلامت مالی</div><div class="value" id="healthScore">۰</div><div class="sub">از ۱۰۰</div></div>
+      </div>
+
+      <div class="card" id="budget-card">
+        <h2><i class="fas fa-wallet"></i> بودجه</h2>
+        <div class="form-row">
+          <input type="text" inputmode="decimal" id="budgetInput" placeholder="مبلغ بودجه" />
+          <button onclick="setBudget()">ثبت</button>
+        </div>
+        <div class="budget-progress" id="budgetProgress"><div class="fill" style="width:0%"></div></div>
+      </div>
+
+      <div class="card" id="goal-card">
+        <h2><i class="fas fa-bullseye"></i> هدف مالی</h2>
+        <div class="form-grid">
+          <input type="text" inputmode="decimal" id="goalInput" placeholder="مبلغ هدف" />
+          <input type="date" id="goalDeadline" />
+          <button onclick="setGoal()" style="grid-column:1/-1;">ثبت هدف</button>
+        </div>
+        <div class="goal-container">
+          <div style="display:flex; justify-content:space-between; font-size:13px;">
+            <span>پیشرفت به سمت هدف</span>
+            <span id="goalProgressText">۰%</span>
+          </div>
+          <div class="goal-progress"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
+          <div style="margin-top:6px; font-size:12px; color:#94a3b8;">
+            پس‌انداز: <span id="currentSavings">۰</span> از <span id="goalAmountDisplay">۰</span>
+            <br>سررسید: <span id="goalDeadlineDisplay">تعیین نشده</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== TAB 2: TRANSACTIONS ===== -->
+    <div id="tab-transactions" class="tab-content">
+
+      <div class="card" id="income-card">
+        <h2><i class="fas fa-arrow-down" style="color:#10b981;"></i> ثبت درآمد</h2>
+        <div class="form-grid">
+          <input type="date" id="incomeDate" />
+          <input type="text" id="incomeDesc" placeholder="شرح" />
+          <select id="incomeCategory"><option>حقوق</option><option>سود سرمایه‌گذاری</option><option>فروش کالا</option><option>هدیه</option><option>سایر</option></select>
+          <input type="text" inputmode="decimal" id="incomeValue" placeholder="مبلغ" />
+          <select id="incomeAccount"><option value="0">انتخاب حساب</option></select>
+          <button onclick="addIncome()">ثبت درآمد</button>
+        </div>
+        <div id="incomeList" class="list"></div>
+      </div>
+
+      <div class="card" id="expense-card">
+        <h2><i class="fas fa-arrow-up" style="color:#ef4444;"></i> ثبت هزینه</h2>
+        <div class="form-grid">
+          <input type="date" id="expenseDate" />
+          <input type="text" id="expenseDesc" placeholder="شرح" />
+          <select id="expenseCategory"><option>خوراک</option><option>پوشاک</option><option>حمل و نقل</option><option>تفریح</option><option>قبوض</option><option>اینترنت</option><option>بهداشت</option><option>آموزش</option><option>مسکن</option><option>متفرقه</option></select>
+          <input type="text" inputmode="decimal" id="expenseValue" placeholder="مبلغ" />
+          <select id="expenseAccount"><option value="0">انتخاب حساب</option></select>
+          <button onclick="addExpense()">ثبت هزینه</button>
+        </div>
+        <div id="expenseList" class="list"></div>
+      </div>
+
+    </div>
+
+    <!-- ===== TAB 3: ACCOUNTS ===== -->
+    <div id="tab-accounts" class="tab-content">
+
+      <div class="card" id="accounts-card">
+        <h2><i class="fas fa-university"></i> حساب‌های من</h2>
+        <div class="form-grid">
+          <input type="text" id="accountName" placeholder="نام حساب" />
+          <select id="accountType"><option value="bank">بانکی</option><option value="cash">نقدی</option><option value="credit">اعتباری</option></select>
+          <input type="text" inputmode="decimal" id="accountBalance" placeholder="موجودی" />
+          <button onclick="addAccount()">افزودن حساب</button>
+        </div>
+        <div id="accountList" class="list"></div>
+        <div style="margin-top:12px; border-top:2px solid #f1f5f9; padding-top:12px;">
+          <h4 style="font-size:14px; margin-bottom:8px;">🔄 انتقال وجه</h4>
+          <div class="form-grid">
+            <select id="transferFrom"><option value="">انتخاب مبدا</option></select>
+            <select id="transferTo"><option value="">انتخاب مقصد</option></select>
+            <input type="text" inputmode="decimal" id="transferAmount" placeholder="مبلغ" />
+            <button onclick="transferMoney()">انتقال</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="category-budget-card">
+        <h2><i class="fas fa-tags"></i> بودجه‌بندی دسته‌ها</h2>
+        <div class="form-grid">
+          <select id="categoryBudgetSelect">
+            <option>خوراک</option><option>پوشاک</option><option>حمل و نقل</option>
+            <option>تفریح</option><option>قبوض</option><option>اینترنت</option>
+            <option>بهداشت</option><option>آموزش</option><option>مسکن</option><option>متفرقه</option>
+          </select>
+          <input type="text" inputmode="decimal" id="categoryBudgetInput" placeholder="سقف هزینه" />
+          <button onclick="setCategoryBudget()" style="grid-column:1/-1;">ثبت سقف</button>
+        </div>
+        <div id="categoryBudgetList" class="list"></div>
+      </div>
+
+    </div>
+
+    <!-- ===== TAB 4: ANALYSIS ===== -->
+    <div id="tab-analysis" class="tab-content">
+
+      <div class="card" id="chart-card">
+        <h2><i class="fas fa-chart-line"></i> نمودار روند</h2>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+          <button onclick="setChartPeriod('weekly')" style="padding:4px 12px; font-size:11px; background:#10B981;">هفتگی</button>
+          <button onclick="setChartPeriod('monthly')" style="padding:4px 12px; font-size:11px; background:#10B981;">ماهانه</button>
+          <button onclick="setChartPeriod('yearly')" style="padding:4px 12px; font-size:11px; background:#10B981;">سالانه</button>
+          <button onclick="compareMonths()" style="padding:4px 12px; font-size:11px; background:#8B5CF6;">📊 مقایسه</button>
+        </div>
+        <div class="chart-container"><canvas id="trendChart"></canvas></div>
+        <div id="expenseAnalysisList" class="analysis-list"></div>
+      </div>
+
+    </div>
+
+    <!-- ===== TAB 5: SETTINGS ===== -->
+    <div id="tab-settings" class="tab-content">
+
+      <div class="card" id="recurring-card">
+        <h2><i class="fas fa-sync-alt"></i> درآمد دوره‌ای</h2>
+        <div class="form-grid">
+          <input type="text" id="recurringIncomeTitle" placeholder="عنوان" />
+          <select id="recurringIncomePeriod"><option value="daily">روزانه</option><option value="weekly">هفتگی</option><option value="monthly">ماهانه</option></select>
+          <input type="text" inputmode="decimal" id="recurringIncomeAmount" placeholder="مبلغ" />
+          <button onclick="addRecurringIncome()">افزودن</button>
+        </div>
+        <div id="recurringIncomeList" class="list"></div>
+      </div>
+
+      <div class="card" id="reminder-card">
+        <h2><i class="fas fa-bell"></i> یادآوری پرداخت</h2>
+        <div class="form-grid">
+          <input type="text" id="reminderTitle" placeholder="عنوان" />
+          <input type="date" id="reminderDate" />
+          <input type="text" inputmode="decimal" id="reminderAmount" placeholder="مبلغ" />
+          <button onclick="addReminder()">افزودن</button>
+        </div>
+        <div id="reminderList" class="list"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ===== CUSTOM JAVASCRIPT ===== -->
+  <script src="index.js"></script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('✅ Service Worker ثبت شد'))
+      .catch(() => console.log('❌ خطا در ثبت Service Worker'));
+  }
+</script>
+
+</body>
+</html>
